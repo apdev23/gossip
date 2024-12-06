@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "539741403756",
+    "project_id": "gossip-158fb",
+    "storage_bucket": "gossip-158fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539741403756:android:4fb05de107c40b151df649",
+        "android_client_info": {
+          "package_name": "com.gossip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539741403756-714auo3e7h8ag34ig12gicnn6f1n7s62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gossip",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "539741403756-8kh6ihpk1oosrfhu4emutksk05ok7a3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5fJHxkKGaf5hT2rHt389qszfmz2YEnaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539741403756-8kh6ihpk1oosrfhu4emutksk05ok7a3q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
