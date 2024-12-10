@@ -3,12 +3,14 @@ import { TextInput, StyleSheet, StyleProp, TextStyle, KeyboardTypeOptions } from
 
 type TextInputProps = {
     onBlur: () => void;
-    onChange: (text: string) => void; 
-    inputStyle?: StyleProp<TextStyle>; 
+    onChange: (text: string) => void;
+    inputStyle?: StyleProp<TextStyle>;
     value?: string;
+    autoCapitalize?: string;
     placeholder?: string;
-    keyboardType?: KeyboardTypeOptions; 
-    secureTextEntry?: boolean; 
+    keyboardType?: KeyboardTypeOptions;
+    secureTextEntry?: boolean;
+    maxLength: number;
 };
 
 const TextInputComponent: React.FC<TextInputProps> = ({
@@ -17,8 +19,10 @@ const TextInputComponent: React.FC<TextInputProps> = ({
     inputStyle,
     value,
     placeholder,
-    keyboardType = 'default', 
+    keyboardType = 'default',
     secureTextEntry = false,
+    autoCapitalize = "none",
+    maxLength
 }) => {
     return (
         <TextInput
@@ -30,6 +34,9 @@ const TextInputComponent: React.FC<TextInputProps> = ({
             keyboardType={keyboardType}
             secureTextEntry={secureTextEntry}
             placeholderTextColor="gray"
+            autoCapitalize={autoCapitalize}
+            maxLength={maxLength}
+
         />
     );
 };

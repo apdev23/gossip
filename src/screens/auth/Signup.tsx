@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, SafeAreaView, ScrollView, Alert, ToastAndroid } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import TextInputComponent from '../../components/TextInputComponent';
@@ -7,8 +7,11 @@ import uuid from 'react-native-uuid';
 import Logo from '../../assets/svg/logo.svg'
 import { verticalScale } from '../../utils/Matrics';
 import SignupStyle from '../../styles/SignupStyle';
+import Loader from '../../components/Loader';
 
 const Signup = (props: any) => {
+  const [visible, setVisible] = useState(false);
+
   const { control, handleSubmit, formState: { errors }, getValues } = useForm({
     defaultValues: {
       name: '',
@@ -28,6 +31,7 @@ const Signup = (props: any) => {
         Alert.alert('Email is already registered');
         return;
       }
+      setVisible(true);
 
       const userId: any = uuid.v4();
       await firebase().collection("users").doc(userId).set({
@@ -37,10 +41,11 @@ const Signup = (props: any) => {
         mobile: data.mobile,
         userId: userId,
       });
-
+      setVisible(false);
       ToastAndroid.showWithGravity('User Created', 10, 0);
       props.navigation.goBack();
     } catch (error) {
+      setVisible(false);
       console.log(error, "error");
     }
   };
@@ -80,7 +85,7 @@ const Signup = (props: any) => {
           <Logo height={100} width={100} />
         </View>
         <Text style={SignupStyle.h1Style}>Sign Up</Text>
-        <ScrollView >
+        <ScrollView showsVerticalScrollIndicator={false}>
 
           <Text style={SignupStyle.label}>Name</Text>
           <Controller
@@ -95,6 +100,7 @@ const Signup = (props: any) => {
                 onChange={onChange}
                 value={value}
                 placeholder="Enter your name"
+                autoCapitalize={'words'}
               />
             )}
             name="name"
@@ -130,7 +136,8 @@ const Signup = (props: any) => {
             control={control}
             rules={{
               required: 'Mobile number is required',
-              validate: validateMobile
+              validate: validateMobile,
+              maxLength: 10
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInputComponent
@@ -140,6 +147,7 @@ const Signup = (props: any) => {
                 value={value}
                 placeholder="Enter your mobile number"
                 keyboardType="numeric"
+                maxLength={10}
               />
             )}
             name="mobile"
@@ -195,6 +203,7 @@ const Signup = (props: any) => {
           <Button title="Sign up" onPress={handleSubmit(onSubmit)} />
         </View>
       </View>
+      <Loader visible={visible} />
 
     </SafeAreaView>
   );

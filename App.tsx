@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 import MainNavigation from './src/navigation/MainNavigation';
 import BootSplash from "react-native-bootsplash";
-import { firebase } from '@react-native-firebase/firestore';
+import { firebase } from '@react-native-firebase/messaging';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/Store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -20,10 +20,13 @@ function App(): React.JSX.Element {
     appId: "1:539741403756:android:4fb05de107c40b151df649",
   };
 
-  if (!firebase?.apps?.length) {
-    firebase.initializeApp(firebaseConfig);
+  let app;
+  console.log(app, "app-----");
+  
+  if (firebase?.apps?.length === 0) {
+    app = firebase?.initializeApp(firebaseConfig);
   } else {
-    firebase.app();
+    app = firebase?.app();
   }
 
   useEffect(() => {

@@ -8,15 +8,13 @@ const Users = (props: any) => {
     const [userList, setUserList] = useState([]);
     const state = useSelector((state: any) => state.user.loginData);
 
-    console.log(state, "kkdkk");
-
     useEffect(() => {
         getUser();
     }, []);
 
     const getUser = async () => {
         let tempData = [];
-        firestore().collection("users").where("email", "!=", state?.email).get().then(res => {
+        await firestore().collection("users").where("email", "!=", state?.email).get().then(res => {
             console.log(JSON.stringify(res.docs[0].data()));
             if (res.docs != []) {
                 res?.docs?.map(item => {
@@ -26,7 +24,6 @@ const Users = (props: any) => {
             setUserList(tempData);
         })
     }
-    // console.log(userList, "userList----");
 
     return (
         <SafeAreaView style={UsersStyle.safeAreaViewStyle}>

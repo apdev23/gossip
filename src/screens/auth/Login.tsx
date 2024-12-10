@@ -21,12 +21,10 @@ const Login = (props: any) => {
   });
 
   const onSubmit = data => {
-    console.log(data);
     setVisible(true);
     firebase().collection("users").where("email", "==", data.email).get().then(res => {
       console.log(res, "res");
       if (res.docs !== []) {
-        console.log(JSON.stringify(res.docs[0].data()));
         props.getAuthSuccess({
           name: res.docs[0].data().name,
           email: res.docs[0].data().email,
